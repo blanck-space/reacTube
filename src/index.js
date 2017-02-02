@@ -10,33 +10,39 @@ class App extends Component{
     super(props);
     this.state = {
       vids: [],
-      currentVideo: null
+      currentVideo: null,
+      term: "David Bowie"
      };
-    yt({key: YT_KEY, term: 'lou reed', maxResults: 5},(res)=>{
-      this.setState({
-        vids:res,
-        currentVideo: res[0]
-      });
-    });
-  }
+     this._search(this.state.term);
+   }
 
   render(){
     return(
         <div>
-          <SearchBar/>
+          <SearchBar term={(newTerm)=>this._search(newTerm)}/>
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-8">
                 <VideoDetail currVideo={this.state.currentVideo} />
               </div>
               <div className="col-md-4">
-                <VList vids={this.state.vids}/>
+                <VList
+                  vids={this.state.vids}
+                  onItemClick={(newVid)=>this.setState({currentVideo: newVid}) }/> {/**/}
               </div>
             </div>
           </div>
         </div>
     );
   }
+  _search(term){
+   yt({key: YT_KEY, term: term, maxResults: 5},(res)=>{
+     this.setState({
+       vids:res,
+       currentVideo: res[0]
+     });
+   });
+ }
 }
 
 ReactDOM.render(<App />  , document.querySelector('.container'));

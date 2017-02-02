@@ -2,7 +2,7 @@ import React from 'react';
 
 const VListItem = (props) => {
   return(
-    <li className="list-group-item">
+    <li onClick={()=>props.onItemClick(props.video)} className="list-group-item">
       <div className="video-list media">
         <div className="media-left">
           <img className="media-object" src={props.video.snippet.thumbnails.default.url} />

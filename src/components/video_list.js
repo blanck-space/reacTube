@@ -3,7 +3,7 @@ import VListItem from './list_items';
 
 const VList = (props) => {
   const listItems = props.vids.map((video)=>{
-    return <VListItem key={video.etag} video={video} />
+    return <VListItem key={video.etag} video={video} onItemClick={props.onItemClick} />
   });
   console.log(listItems);
   return(
