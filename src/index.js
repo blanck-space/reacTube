@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import SearchBar from './components/search_bar';
@@ -19,7 +20,7 @@ class App extends Component{
   render(){
     return(
         <div>
-          <SearchBar term={(newTerm)=>this._search(newTerm)}/>
+          <SearchBar termChanger={_.debounce((newTerm)=>this._search(newTerm), 300)}/> //debounced search by 300ms
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-8">
@@ -36,6 +37,7 @@ class App extends Component{
     );
   }
   _search(term){
+    console.log("search initiated!");
    yt({key: YT_KEY, term: term, maxResults: 5},(res)=>{
      this.setState({
        vids:res,
