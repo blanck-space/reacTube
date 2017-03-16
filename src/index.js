@@ -29,7 +29,7 @@ class App extends Component{
               <div className="col-md-4">
                 <VList
                   vids={this.state.vids}
-                  onItemClick={(newVid)=>this.setState({currentVideo: newVid}) }/> {/**/}
+                  onItemClick={(newVid)=>this.setState({currentVideo: newVid}) }/>
               </div>
             </div>
           </div>
